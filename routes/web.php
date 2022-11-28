@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DonnorController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\AppSetting;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('admin/dashboard',[AdminController::class,'dashboard']);
+Route::get('admin/donnors',[DonnorController::class,'donnor_page']);
+Route::get('admin/subscription',[SubscriptionController::class,'subscription_page']);
+Route::get('donnor-data',[DonnorController::class,'getData']);
+Route::get('admin/app-setting/manage-services',[AppSetting::class,'manage_services']);
+Route::get('admin/app-setting/manage-slider',[AppSetting::class,'manage_slider']);
+Route::get('admin/app-setting/manage-notification',[AppSetting::class,'manage_notification']);
