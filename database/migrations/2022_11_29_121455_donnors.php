@@ -16,7 +16,7 @@ class Donnors extends Migration
         Schema::create('Donnors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('mobile_number');
             $table->string('address');
             $table->string('city');

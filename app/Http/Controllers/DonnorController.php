@@ -40,9 +40,13 @@ class DonnorController extends Controller
         $newArr = [];
         foreach($arrData as $data) {
             $newArr[] = array(
-                "id"=>$data['id'],
-                "name"=>$data['full_name'],
-                "email"=>$data['username'],
+                "name"=>$data['name'],
+                "email"=>$data['email'],
+                "mobile_number"=>$data['mobile_number'],
+                "address"=>$data['address'],
+                "city"=>$data['city'],
+                "pin_code"=>$data['pin_code'],
+                "pan_number"=>$data['pan_number'],
             );
         }
         $response = array(
@@ -53,5 +57,27 @@ class DonnorController extends Controller
         );
         return response()->json($response);
     
+    }
+    public function SubmitData(Request $req)
+    {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'mobile_number' => 'required | min:10 | max:10',
+            'address' => 'required',
+            'city' => 'required',
+            'pin_code' => 'required',
+            'pan_number' => 'required'
+        ]);
+        $table = new Donnors();
+        $table->name = $req->name;
+        $table->email = $req->email;
+        $table->mobile_number = $req->mobile_number;
+        $table->address = $req->address;
+        $table->city = $req->city;
+        $table->pin_code = $req->pin_code;
+        $table->pan_number = $req->pan_number;
+        $table->save();
+        return redirect('admin/donnors');
     }
 }

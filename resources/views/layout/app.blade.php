@@ -20,7 +20,13 @@
     <!-- Icons css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
     <link href="{{ url('public/admin_assets') }}/css/icons.min.css" rel="stylesheet" type="text/css" />
-    
+    <style>
+        .error
+        {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
 </head>
 </head>
 <body>
@@ -573,9 +579,10 @@ $(document).ready(function () {
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'mobile_number', name: 'mobile_number'},
-            {data: 'address', name: 'city'},
+            {data: 'address', name: 'address'},
+            {data: 'city', name: 'city'},
             {data: 'pin_code', name: 'pin_code'},
-            {data: 'pan_number', name: 'pan_number'}
+            {data: 'pan_number', name: 'pan_number'},
         ]
     });
 });

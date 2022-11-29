@@ -25,3 +25,4 @@ Route::get('donnor-data',[DonnorController::class,'getData']);
 Route::get('admin/app-setting/manage-services',[AppSetting::class,'manage_services']);
 Route::get('admin/app-setting/manage-slider',[AppSetting::class,'manage_slider']);
 Route::get('admin/app-setting/manage-notification',[AppSetting::class,'manage_notification']);
+Route::post('SubmitData',[DonnorController::class,'SubmitData']);
