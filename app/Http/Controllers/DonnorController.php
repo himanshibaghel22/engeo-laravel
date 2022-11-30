@@ -40,6 +40,7 @@ class DonnorController extends Controller
         $newArr = [];
         foreach($arrData as $data) {
             $newArr[] = array(
+                "user_id"=>$data['user_id'],
                 "name"=>$data['name'],
                 "email"=>$data['email'],
                 "mobile_number"=>$data['mobile_number'],
@@ -63,13 +64,16 @@ class DonnorController extends Controller
         $req->validate([
             'name' => 'required',
             'email' => 'required',
-            'mobile_number' => 'required | min:10 | max:10',
+            'mobile_number' => 'required | numeric | digits:10',
             'address' => 'required',
             'city' => 'required',
             'pin_code' => 'required',
             'pan_number' => 'required'
         ]);
+        $bytes = random_bytes(5);
+        $user_id = bin2hex($bytes);
         $table = new Donnors();
+        $table->user_id = $user_id;
         $table->name = $req->name;
         $table->email = $req->email;
         $table->mobile_number = $req->mobile_number;

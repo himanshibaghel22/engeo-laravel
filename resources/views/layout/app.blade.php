@@ -576,6 +576,7 @@ $(document).ready(function () {
         serverSide: true,
         ajax: "{{ url('donnor-data') }}",
         columns: [
+            {data: 'user_id', name: 'user_id'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'mobile_number', name: 'mobile_number'},
