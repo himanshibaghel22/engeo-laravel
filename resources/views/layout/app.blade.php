@@ -569,14 +569,13 @@
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ url('public/admin_assets') }}/js/app.js"></script>
 <script>
-$(document).ready(function () {
-  //  $('#example').DataTable();
-  var table = $('#example').DataTable({
+    $(document).ready(function(){
+        var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('donnor-data') }}",
+        ajax: "{{ url('data') }}",
         columns: [
-            {data: 'user_id', name: 'user_id'},
+            {data: 'user_id', name: 'id'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'mobile_number', name: 'mobile_number'},
@@ -584,9 +583,29 @@ $(document).ready(function () {
             {data: 'city', name: 'city'},
             {data: 'pin_code', name: 'pin_code'},
             {data: 'pan_number', name: 'pan_number'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
+        });
     });
-});
+    $(document).on('click','#editBtn',function(){
+        var id = $(this).attr("data-id");
+        var name = $(this).attr("data-name");
+        var email = $(this).attr("data-email");
+        var mobile_number = $(this).attr("data-mobile_number");
+        var address = $(this).attr("data-address");
+        var city = $(this).attr("data-city");
+        var pin_code = $(this).attr("data-pin_code");
+        var pan_number = $(this).attr("data-pan_number");
+        $('#edit-modal').modal('show');
+        $('#edit_id').val(id);
+        $('#edit_name').val(name);
+        $('#edit_email').val(email);
+        $('#edit_mobile_number').val(mobile_number);
+        $('#edit_address').val(address);
+        $('#edit_city').val(city);
+        $('#edit_pin_code').val(pin_code);
+        $('#edit_pan_number').val(pan_number);
+    });
 </script>
 </body>
 </html>
