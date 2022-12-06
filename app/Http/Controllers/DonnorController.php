@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use App\Models\Donnor;
 use DataTables;
-
+use Facade\FlareClient\Http\Response;
 
 class DonnorController extends Controller
 {
@@ -32,12 +32,11 @@ class DonnorController extends Controller
             
                     
         }
-        //return redirect('donnors',[data=>])
         
     }
     public function SubmitData(Request $req)
     {
-        $req->validate([
+        $data = $req->validate([
             'name' => 'required',
             'email' => 'required',
             'mobile_number' => 'required | numeric | digits:10',
@@ -46,6 +45,7 @@ class DonnorController extends Controller
             'pin_code' => 'required',
             'pan_number' => 'required'
         ]);
+        return $req->input();
         $bytes = random_bytes(5);
         $uniqu_code = bin2hex($bytes);
         $user_id = strtoupper($uniqu_code);
@@ -73,12 +73,7 @@ class DonnorController extends Controller
             'pan_number' => 'required'
         ]);
         $id = $req->id;
-        
-        $bytes = random_bytes(5);
-        $uniqu_code = bin2hex($bytes);
-        $user_id = strtoupper($uniqu_code);
         $table = Donnor::where('id', '=' , $id)->first();
-        $table->user_id = $user_id;
         $table->name = $req->name;
         $table->email = $req->email;
         $table->mobile_number = $req->mobile_number;

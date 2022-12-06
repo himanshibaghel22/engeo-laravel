@@ -29,7 +29,6 @@
     <tbody>
     </tbody>
 </table>
-
     <!-- Add Users Modal -->
     <div id="add-users" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="compose-header-modalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -45,7 +44,7 @@
                         <div class="mb-2">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" placeholder="Your Name">
-                            <span class="error">@error('name') * {{ $message }} @enderror</span>
+                            <span class="error" id="name_error">@error('name') * {{ $message }} @enderror</span>
                         </div>
                         <div class="mb-2">
                             <label for="email" class="form-label">Eamil</label>
