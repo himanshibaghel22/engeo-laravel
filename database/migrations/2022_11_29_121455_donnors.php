@@ -15,6 +15,7 @@ class Donnors extends Migration
     {
         Schema::create('Donnors', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('name');
             $table->string('email');
             $table->string('mobile_number');
@@ -25,6 +26,8 @@ class Donnors extends Migration
             $table->integer('status')->default('1');
             $table->timestamps();
         });
+
+        Schema::rename('Donnors', 'ngo_Donnors');
     }
 
     /**

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Donnor extends Model
 {
     use HasFactory;
+    public $table="ngo_donnors";
 }

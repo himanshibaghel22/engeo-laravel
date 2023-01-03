@@ -3,9 +3,8 @@
 <head>
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
+    <title>Dashboard | Shiv Shakti</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ url('public/admin_assets') }}/images/favicon.ico">
@@ -20,12 +19,101 @@
     <!-- Icons css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
     <link href="{{ url('public/admin_assets') }}/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <style>
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+   <style>
+        .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #727cf5;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #727cf5;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
         .error
         {
             color: red;
             font-size: 12px;
         }
+        @media only screen and (max-width: 600px)
+        {
+            #DataTables_Table_0_wrapper
+            {
+                width: 100%;
+                overflow: scroll;
+            }
+            #DataTables_Table_0_length
+            {
+                width: 10%;
+                float: left;
+            }
+            #DataTables_Table_0_filter
+            {
+                width: 30%;
+                float: left;
+                padding-left: 100%;
+            }
+            .col-sm-12
+            {
+                float: left;
+                width: 25%;
+            }
+        }
+        
     </style>
 </head>
 </head>
@@ -320,11 +408,10 @@
                             <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                 aria-expanded="false">
                                 <span class="account-user-avatar"> 
-                                    <img src="{{ url('public/admin_assets') }}/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                    <img src="{{ url('public/admin_assets') }}/images/users/demo.png" alt="user-image" class="rounded-circle">
                                 </span>
                                 <span>
-                                    <span class="account-user-name">Dominic Keller</span>
-                                    <span class="account-position">Founder</span>
+                                    <span class="account-user-name" style="margin-top: 8px;">Shiv Shakti Team</span>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
@@ -358,7 +445,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{ url('logout') }}" class="dropdown-item notify-item">
                                     <i class="mdi mdi-logout me-1"></i>
                                     <span>Logout</span>
                                 </a>
@@ -491,20 +578,31 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a  href="{{ url('admin/subscription') }}" aria-expanded="false"
+                            <a  href="#sidebarThirdLevel" data-bs-toggle="collapse" aria-expanded="false"
                                 aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class=" ri-shield-user-fill" aria-hidden="true"></i>
-                                <span> Subscriptions  </span>
+                                <span>  Subscriptions  </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <div class="collapse" id="sidebarThirdLevel">
+                                <ul class="side-nav-third-level">
+                                    <li>
+                                        <a href="{{ url('admin/subscription/add-subscription') }}">Add Subscription</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('admin/subscription/view-subscription') }}">View Subscription</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="side-nav-item">
-                            <a  href="#sidebarThirdLevel" data-bs-toggle="collapse" aria-expanded="false"
+                            <a  href="#sidebarFourthLevel" data-bs-toggle="collapse" aria-expanded="false"
                                 aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class="ri-settings-3-line noti-icon"></i>
                                 <span> App Setting  </span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <div class="collapse" id="sidebarThirdLevel">
+                            <div class="collapse" id="sidebarFourthLevel">
                                 <ul class="side-nav-third-level">
                                     <li>
                                         <a href="{{ url('admin/app-setting/manage-slider') }}">Manage Slider</a>
@@ -538,7 +636,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+                <script>document.write(new Date().getFullYear())</script> © Design and Devloped by MyProject HD
             </div>
             <div class="col-md-6">
                 <div class="text-md-end footer-links d-none d-md-block">
@@ -568,6 +666,9 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ url('public/admin_assets') }}/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  
+<script src="{{ url('public/admin_assets') }}/custom_js/validation.js"></script>
 <script>
     $(document).ready(function(){
         var table = $('.data-table').DataTable({
@@ -586,6 +687,89 @@
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
         });
+        var table = $('.sub-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('sub-data') }}",
+        columns: [
+            {data: 'donnors', name: 'donnors'},
+            {data: 'amount', name: 'amount'},
+            {data: 'duration_number', name: 'duration_number'},
+            {data: 'duration', name: 'duration'},
+            {data: 'emi', name: 'emi'}
+        ]
+        });
+        var table = $('.getData').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('getdataSlider') }}",
+        columns: 
+        [
+            {
+                data: 'image',
+                name: 'image',
+                render: function(data, type, full, meta){
+                    return "<span class='logo-lg'><img src='{{ url('public/slider_images/')}}/"+ data + "' width='100px' alt='slider image'></span>"
+                }
+            },
+            {data: 'title', name: 'title', orderable: false, searchable: false},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+        });
+        var table = $('.noti_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('getData') }}",
+        columns: [
+            {data: 'title', name: 'title'},
+            {data: 'description', name: 'description'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+        });  
+         $(document).on('click','.check',function(){ 
+            var id = $('.id').val();
+            alert(id);
+        //     $.post('php/detail.php',data,function(resp){
+        //         if (resp==1)   
+        //         {
+        //           window.location.reload();
+        //         }
+        //    });  
+            
+            // $(this).change(function() {
+    		// if(this.checked) 
+			// {
+            //     var data=new FormData($(this)[0]);
+            //     $.ajax({
+            //         type:'POST',
+            //         url: '{{ url("StatusChange") }}',
+            //         data: data,
+            //         contentType:false,
+            //         processData:false,
+            //         success:function(resp)
+            //         {
+            //             //window.location = "{{ url('admin/app-setting/manage-slider') }}";
+            //         } 
+            //     });
+    		// }
+            // else
+            // {
+            //     var data=new FormData($(this)[0]);
+            //     $.ajax({
+            //         type:'POST',
+            //         url: '{{ url("StatusChange") }}',
+            //         data: data,
+            //         contentType:false,
+            //         processData:false,
+            //         success:function(resp)
+            //         {
+            //             console.log(resp)
+            //             //window.location = "{{ url('admin/app-setting/manage-slider') }}";
+            //         } 
+            //     });
+            // }
+		// });
+         })  
     });
     $(document).on('click','#editBtn',function(){
         var id = $(this).attr("data-id");
@@ -605,6 +789,84 @@
         $('#edit_city').val(city);
         $('#edit_pin_code').val(pin_code);
         $('#edit_pan_number').val(pan_number);
+    });
+    $(document).on('click','#delete_btn',function(){
+        var id = $(this).attr('data-id');
+        $('#id').val(id);
+        var url = "{{ url('delete/') }}/"+id;
+        $('#con_delete').attr("href",url);
+    });
+    $(document).on('click','#edit_slider_Btn',function(){
+        var id = $(this).attr("data-id");
+        var title = $(this).attr("data-title");
+        var image = $(this).attr("data-image");
+        $('#edit-slider').modal('show');
+        $('#edit_id').val(id);
+        $('#edit_title').val(title);
+        $('#edit_image').val(image);
+    });
+    $(document).on("click","#submit",function(){
+        var image = $('#image').val();
+        if(image == '')
+        {
+            $("#image_error").html("* The Field is Required")
+            setTimeout(function(){
+                $("#image_error").html("")
+            }, 3000);
+        }
+        
+    });
+    $(document).on('click','#submit',function(){
+        var title = $('#title').val();
+        var desc = $('#description').val();
+        if(title == '')
+        {
+            $("#title_error").html("* The Field is Required")
+            setTimeout(function(){
+                $("#title_error").html("")
+            }, 3000);
+        }
+        if(desc == '')
+        {
+            $("#description_error").html("* The Field is Required")
+            setTimeout(function(){
+                $("#description_error").html("")
+            }, 3000);
+        }
+    })
+    $(document).on('submit','.database_operation_form',function(){
+        var url=$(this).attr('action');
+        var data=new FormData($(this)[0]);
+        var popup=$(this).attr('data-pop');
+        $.ajax({
+            type:'POST',
+            url:url,
+            data:data,
+            contentType:false,
+            processData:false,
+            success:function(resp)
+            { 
+                if(resp == 1)
+                {
+                    window.location="{{ url('admin/subscription/view-subscription') }}";
+                }
+                else if(resp == 2)
+                {
+                    window.location="{{ url('admin/donnors') }}";
+                }
+                else if(resp == 3)
+                {   
+                    window.location="{{ url('admin/app-setting/manage-slider') }}";
+                }
+                else if(resp == 'notification saved')
+                {
+                    window.location="{{ url('admin/app-setting/manage-notification') }}";
+                }
+            }
+
+
+        });
+        return false;
     });
 </script>
 </body>

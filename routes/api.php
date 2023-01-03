@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post("login",[APIController::class,'login']);
+Route::get("active-slider",[APIController::class,'active_slider']);
+Route::get('subscriptions/{id}',[APIController::class,'subscriptions']);

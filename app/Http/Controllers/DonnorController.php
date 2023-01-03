@@ -28,9 +28,7 @@ class DonnorController extends Controller
                         return $edit;
                     })
                     ->rawColumns(['action'])
-                    ->make(true);
-            
-                    
+                    ->make(true);          
         }
         
     }
@@ -42,10 +40,9 @@ class DonnorController extends Controller
             'mobile_number' => 'required | numeric | digits:10',
             'address' => 'required',
             'city' => 'required',
-            'pin_code' => 'required',
-            'pan_number' => 'required'
+            'pin_code' => 'required | numeric | digits:6',
+            'pan_number' => 'required | max:10'
         ]);
-        return $req->input();
         $bytes = random_bytes(5);
         $uniqu_code = bin2hex($bytes);
         $user_id = strtoupper($uniqu_code);
@@ -59,7 +56,7 @@ class DonnorController extends Controller
         $table->pin_code = $req->pin_code;
         $table->pan_number = $req->pan_number;
         $table->save();
-        return redirect('admin/donnors');
+        return 2;
     }
     public function UpdateData(Request $req)
     {
@@ -82,6 +79,6 @@ class DonnorController extends Controller
         $table->pin_code = $req->pin_code;
         $table->pan_number = $req->pan_number;
         $table->save();
-        return redirect('admin/donnors');   
+        return 2;   
     }
 }
